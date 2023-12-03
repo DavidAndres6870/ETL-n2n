@@ -495,4 +495,4 @@ def api_data_loader():
     set_with_dataframe(sheet_instance, df2, row=dfToUpdate.shape[0] + 2, include_column_header=False)
     print('ok')
 
-lambda_handler(1,2)
+#lambda_handler(1,2)
