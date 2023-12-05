@@ -1,0 +1,8 @@
+version: '3'
+services:
+  my_service:
+    image: docker-image:etl
+    env_file:
+      - .env
+    ports:
+      - "9000:8080"
