@@ -258,7 +258,8 @@ def api_data_loader():
         elif meeting_date <= datetime(2023,4,6): return 7
         elif meeting_date <= datetime(2023,6,29): return 8
         elif meeting_date <= datetime(2023,12,31): return 9
-        else: return 9
+        elif meeting_date <= datetime(2024,4,30): return 10
+        else: return 11
 
     def return_season_montreal(meeting_date: str) -> int:
         """
