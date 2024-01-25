@@ -269,10 +269,9 @@ def api_data_loader():
         Returns:
             int: Number of the Montreal season
         """
-        if meeting_date <= datetime(2021,3,4):
-            return 1
-        else:
-            return 1
+        if meeting_date <= datetime(2023,12,31): return 1
+        elif meeting_date <= datetime(2024,4,30): return 2
+        else: return 3
 
     # Apply the function according to hte city
 
@@ -349,7 +348,8 @@ def api_data_loader():
             str: Format of the meeting
         """
 
-        return "In Person" if "In Person" in eventName else "Online"
+        #return "In Person" if "In Person" or "En persona" in eventName else "Online"
+        return "In Person" if "In Person" in eventName or "En persona" in eventName else "Online"
 
     df['Format'] = df['Event Name'].apply(returnFormat)
 
