@@ -112,6 +112,62 @@ def api_data_loader():
     df['City'] = df['Event Name'].apply(n2n.extract_city)
 
     # Seasons
+<<<<<<< HEAD
+=======
+    def return_season_toronto(meeting_date: str) -> int:
+        """
+        Return the seasson according to the meeting day
+        Args:
+            meeting_date (str): date of the meeting
+        Returns:
+            int: Number of the Toronto season
+        """
+
+        if meeting_date <= datetime(2021,3,4): return 1
+        elif meeting_date <= datetime(2021,6,10): return 2
+        elif meeting_date <= datetime(2021,12,9): return 3
+        elif meeting_date <= datetime(2022,4,14): return 4
+        elif meeting_date <= datetime(2022,7,28): return 5
+        elif meeting_date <= datetime(2022,11,7): return 6
+        elif meeting_date <= datetime(2023,4,6): return 7
+        elif meeting_date <= datetime(2023,6,29): return 8
+        elif meeting_date <= datetime(2023,12,31): return 9
+        elif meeting_date <= datetime(2024,4,30): return 10
+        else: return 11
+
+    def return_season_montreal(meeting_date: str) -> int:
+        """
+        Return the seasson according to the meeting day
+        Args:
+            meeting_date (str): date of the meeting
+        Returns:
+            int: Number of the Montreal season
+        """
+        if meeting_date <= datetime(2023,12,31): return 1
+        elif meeting_date <= datetime(2024,4,30): return 2
+        else: return 3
+
+    # Apply the function according to hte city
+
+    def season_based_on_city(df: pd.DataFrame) -> int:
+        """
+        Return the season according the city of the meeting
+
+        Args:
+            df (dataframe): a dataframe to add the season
+
+        Returns:
+            int: Number of the season according to the city
+        """
+
+        if df['City'] == 'Toronto':
+            return return_season_toronto(df['Date'])
+        elif df['City'] == 'Montreal':
+            return return_season_montreal(df['Date'])
+        else:
+            # Handle other cities or cases if needed
+            return None
+>>>>>>> 7f2cff127370cd13082099cbaf3f4416694a16a5
 
     # transform the data format
     df['Date'] = pd.to_datetime(df['Date Attending'], format='%Y-%m-%dT%H:%M:%S')
@@ -130,7 +186,21 @@ def api_data_loader():
 
     # Format
 
+<<<<<<< HEAD
     df['Format'] = df['Event Name'].apply(n2n.returnFormat)
+=======
+        Args:
+            eventName (str): Full description of event
+
+        Returns:
+            str: Format of the meeting
+        """
+
+        #return "In Person" if "In Person" or "En persona" in eventName else "Online"
+        return "In Person" if "In Person" in eventName or "En persona" in eventName else "Online"
+
+    df['Format'] = df['Event Name'].apply(returnFormat)
+>>>>>>> 7f2cff127370cd13082099cbaf3f4416694a16a5
 
     # Create an empty list to store the counter values
     counter_values = []
