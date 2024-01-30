@@ -176,3 +176,5 @@ readEvenbriteAPI.py
 .env
 python.zip
 trust-policy.json
+commands.txt
+commands.yml
