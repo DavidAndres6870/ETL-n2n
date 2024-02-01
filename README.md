@@ -10,8 +10,8 @@ The project was divided in two organization the ETL process from the Eventbrite 
 * Docker
 * AWS services: EC2,lambda, CloudWatch, S3, ECR
 
-## Specific
-# Check!!
+## Objectives
+<!-- # Check!! -->
 • Utilized Eventbrite API to extract relevant information and data related to 184 events, ensuring accurate and up-to-date details for organizational purposes.
 • Employed Python and AWS tools to automate and streamline the database update process, enhancing efficiency by reducing the manual workload by 90%
 • Designed and developed interactive dashboards to visualize and analyze attendance data for organizational meetings.
