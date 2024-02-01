@@ -45,10 +45,12 @@ The project was divided in two organization the ETL process from the Eventbrite 
 After connecting with Eventbrite API with the selected database and update the data after each meeting, the exploration derived in the building of the dasboard. The dashboards display important information about attendance meetings of the organizations through the time, by country,employment status, event mode, and industry. This dashboars allow to the company to organize and planify the number and industries for future meetings.
 
 [Power BI dashboard](http://3.99.181.155:8050/)
+
 [Access the dashboard here](http://3.99.181.155:8050/)
 
 ## Project structure
 The project was divided in two repositories.
+
 [ETL repository](https://github.com/DavidAndres6870/ETL-n2n) (actual)
 
 [EDA repository](https://github.com/DavidAndres6870/n2n)
