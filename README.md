@@ -50,6 +50,7 @@ After connecting with Eventbrite API with the selected database and update the d
 ## Project structure
 The project was divided in two repositories.
 [ETL repository](https://github.com/DavidAndres6870/ETL-n2n) (actual)
+
 [EDA repository](https://github.com/DavidAndres6870/n2n)
 
 
