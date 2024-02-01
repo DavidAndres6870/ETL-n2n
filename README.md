@@ -17,7 +17,7 @@ The project was divided in two organization the ETL process from the Eventbrite 
 • Designed and developed interactive dashboards to visualize and analyze attendance data for organizational meetings.
 • Utilized visualization tools and techniques to present insights effectively, aiding decision-making processes within the organization, resulting in a 20% increase in meeting attendance rates.
 
-<> (### Part 1)
+<>(### Part 1)
 <> # EDA Notworking2Networking attendance
 
 <> ### Part 2
