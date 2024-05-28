@@ -167,6 +167,7 @@ def api_data_loader():
     # Define a dictionary for replacements
     replacements = {
         '': np.nan,
+        '.': np.nan,
         'Canadá': 'Canada',
         'Perú': 'Peru',
         'España': 'Spain',
@@ -178,9 +179,11 @@ def api_data_loader():
         'Alberta, British Columbia And Calgary.' : 'Canada',
         'Brasil': 'Brazil',
         'Amazonia' : 'Colombia',
+        'Amazonia' : 'Colombia',
         'Dr': np.nan,
         'Yes': np.nan,
         'Spain/Colombia': 'Colombia',
+        'Mexico/El Salvador': 'Mexico',
         'X' : np.nan,
         'Na,India': np.nan,
         'None (Spain)': np.nan,
@@ -190,9 +193,13 @@ def api_data_loader():
         'Ciudad De México' : 'Mexico',
         'Coló Me La' : np.nan,
         'Born In Canada.': np.nan,
+        'Panamá': 'Panama',
         'Mex': np.nan,
         'Na':np.nan,
-        'No':np.nan
+        'N/A':np.nan,
+        'No':np.nan,
+        'Np':np.nan,
+        'N':np.nan,
     }
 
     df['Country of Origin']=df['Country of Origin'].replace(replacements)
