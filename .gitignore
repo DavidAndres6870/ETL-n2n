@@ -178,3 +178,4 @@ python.zip
 trust-policy.json
 commands.txt
 commands.yml
+.github/workflows/test.yml

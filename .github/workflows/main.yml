@@ -1,0 +1,44 @@
+name: ecr_docker_deployment #Deploy Lambda Function
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    docker_cicd:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{aws-access-key-id}}
+          aws-secret-access-key: ${{aws-secret-access-key}}
+          aws-region: ca-central-1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push docker image to Amazon ECR
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: demoytcicdgithubaction
+          IMAGE_TAG: ${{github.sha}}
+        run: |
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          aws lambda update-function-code \
+          --function-name demoytcicdecrtest \
+          --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+        #run:
+          #docker build --platform linux/amd64 -t aws-image:etl_v2 .
+          #docker tag aws-image:etl_v2 505276000084.dkr.ecr.ca-central-1.amazonaws.com/elt-n2n:latest
+          #docker push 505276000084.dkr.ecr.ca-central-1.amazonaws.com/elt-n2n:latest
+
+      #- name: Update Lambda function
+      #  uses: aws-actions/aws-lambda-update-function-code@v1
+      #  with:
+      #    fucntion-name: lambda_function.lambda_handler
+      #    image-uri: ImageUri=111122223333.dkr.ecr.us-east-1.amazonaws.com/hello-world:latest
