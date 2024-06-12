@@ -42,3 +42,24 @@ jobs:
         # aws lambda update-function-code \
         # --function-name etl-function \
         # --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
+    - name: test
+      run: echo "HOLA KE ASE? $IMAGE_URI"
+
+  update_lambda:
+    needs: build_docker
+    runs-on: ubuntu-latest
+    permissions:
+        contents: read
+    steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ vars.REGION }}
+    - name: Debug IMAGE_URI   # Debugging step (optional)
+      run: echo "hi ${{ needs.build_docker.outputs.IMAGE_URI }}"
+    - name: Update Lambda function
+      run: |
+        aws lambda update-function-code --function-name your-lambda-function-name \
+          --image-uri "${{ needs.build_docker.outputs.IMAGE_URI }}"
