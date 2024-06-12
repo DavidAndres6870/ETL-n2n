@@ -9,6 +9,7 @@ The project was divided in two organization the ETL process from the Eventbrite 
 * Python libraries: gspread, numpy, pandas, datetime, ploty, matplotlib, seaborn
 * Docker
 * AWS services: EC2,lambda, CloudWatch, S3, ECR
+* Github actions
 
 ## Objectives
 <!-- # Check!! -->
