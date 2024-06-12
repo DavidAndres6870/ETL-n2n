@@ -2,7 +2,7 @@ name: ecr_docker_deployment
 on:
   push:
     branches:
-      - main
+      - mainn
 
 jobs:
 
@@ -33,8 +33,12 @@ jobs:
         REPOSITORY: elt-n2n
         IMAGE_TAG: ${{github.sha}}
       run: |
+        # Build a docker image from Dockerfile
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        # Push image to ECR
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-        aws lambda update-function-code \
-        --function-name etl-function \
-        --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        # Get the image URI that was pushed to ECR
+        echo "IMAGE_URI=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        # aws lambda update-function-code \
+        # --function-name etl-function \
+        # --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
