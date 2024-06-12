@@ -43,7 +43,7 @@ jobs:
         # --function-name etl-function \
         # --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
     - name: test
-      run: echo "HOLA KE ASE? $IMAGE_URI"
+      run: echo "HOLA KE ASE? $GITHUB_OUTPUT"
 
   update_lambda:
     needs: build_docker
