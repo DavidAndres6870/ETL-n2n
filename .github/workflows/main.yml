@@ -64,7 +64,7 @@ jobs:
     - name: Debug IMAGE_URI   # Debugging step (optional)
       env:
         IMAGE_URI: ${{needs.build_docker.outputs.image_uri}}
-        IMAGE_TAG: ${{github.sha}}
+        #IMAGE_TAG: ${{github.sha}}
 
       run: echo "hi ${{ needs.build_docker.outputs.IMAGE_URI }}"
     - name: Update Lambda function
