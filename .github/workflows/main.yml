@@ -69,5 +69,5 @@ jobs:
       env:
         IMAGE_URI: ${{needs.build_docker.outputs.image_uri}}
       run: |
-        aws lambda update-function-code --function-name your-lambda-function-name \
+        aws lambda update-function-code --function-name etl-function \
           --image-uri "${{ needs.build_docker.outputs.IMAGE_URI }}"
