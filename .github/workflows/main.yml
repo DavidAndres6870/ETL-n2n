@@ -11,6 +11,9 @@ jobs:
     name: Build Image
     runs-on: ubuntu-latest
 
+    outputs:
+      image_uri: ${{ steps.image_uri.outputs.image_uri }}
+
     steps:
 
     - name: Check out code
@@ -28,6 +31,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push docker image to Amazon ECR
+      id: image_uri
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: elt-n2n
@@ -38,12 +42,11 @@ jobs:
         # Push image to ECR
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         # Get the image URI that was pushed to ECR
-        echo "IMAGE_URI=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        echo "image_uri=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
         # aws lambda update-function-code \
         # --function-name etl-function \
         # --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
-    - name: test
-      run: echo "HOLA KE ASE? $GITHUB_OUTPUT"
+
 
   update_lambda:
     needs: build_docker
@@ -51,6 +54,7 @@ jobs:
     permissions:
         contents: read
     steps:
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -58,8 +62,12 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ vars.REGION }}
     - name: Debug IMAGE_URI   # Debugging step (optional)
+      env:
+        IMAGE_URI: ${{needs.build_docker.outputs.image_uri}}
       run: echo "hi ${{ needs.build_docker.outputs.IMAGE_URI }}"
     - name: Update Lambda function
+      env:
+        IMAGE_URI: ${{needs.build_docker.outputs.image_uri}}
       run: |
         aws lambda update-function-code --function-name your-lambda-function-name \
           --image-uri "${{ needs.build_docker.outputs.IMAGE_URI }}"
