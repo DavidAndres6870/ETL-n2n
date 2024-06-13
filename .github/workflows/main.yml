@@ -25,6 +25,7 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ vars.REGION }}
+        mask-aws-account-id: 'false'
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -39,16 +40,13 @@ jobs:
       run: |
 
 
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        #echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
-
         # Build a docker image from Dockerfile
-        #docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         # Push image to ECR
-        #docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         # Get the image URI that was pushed to ECR
-        echo "image_uri=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        echo "image_uri=$REGISTRY/$REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        echo "image_uri"
         # aws lambda update-function-code \
         # --function-name etl-function \
         # --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
@@ -67,10 +65,10 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ vars.REGION }}
+        mask-aws-account-id: 'false'
     - name: Debug IMAGE_URI   # Debugging step (optional)
       env:
         IMAGE_URI: ${{needs.build_docker.outputs.image_uri}}
-        #IMAGE_TAG: ${{github.sha}}
 
       run: echo "hi ${{ needs.build_docker.outputs.IMAGE_URI }}"
     - name: Update Lambda function
