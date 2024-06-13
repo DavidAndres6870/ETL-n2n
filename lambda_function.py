@@ -200,6 +200,8 @@ def api_data_loader():
         'No':np.nan,
         'Np':np.nan,
         'N':np.nan,
+        'Vzla':'Venezuela',
+        'Afghanistan':np.nan
     }
 
     df['Country of Origin']=df['Country of Origin'].replace(replacements)
@@ -237,6 +239,6 @@ def api_data_loader():
     df2 = df[['#','Date', 'City', 'Season', 'Industry / Event', 'Format', 'Attendance',  'Email', 'First Name', 'Last Name', 'Country of Origin', 'Area of Expertise', 'Employment Status', 'Employer', 'Dream Job', 'Linkedin']]
 
     set_with_dataframe(sheet_instance, df2, row=dfToUpdate.shape[0] + 2, include_column_header=False)
-    print('ok v4')
+    print('ok v5')
 
 #lambda_handler(1,2)
