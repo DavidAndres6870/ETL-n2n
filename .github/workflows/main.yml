@@ -35,7 +35,7 @@ jobs:
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         REPOSITORY: elt-n2n
-        IMAGE_TAG: ${{github.sha}}
+        # IMAGE_TAG: ${{github.sha}}
       run: |
         # Build a docker image from Dockerfile
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
