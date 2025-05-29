@@ -204,15 +204,17 @@ def extractName(eventName: str) -> str:
     Returns:
         str: Name of the industry
     """
+
     if "|" in(eventName):
         split_result = eventName.split('|')
 
         eventNameBefore = split_result[0]
         eventNameAfter = split_result[1]
 
-        if "NotWorking to Networking" in(eventNameBefore) or "NotWorking2Networking" in(eventNameBefore) or "NotWorking To Networking" in(eventNameBefore):
+
+        if "NotWorking to Networking" in(eventNameBefore) or "NotWorking2Networking" in(eventNameBefore) or "Notworking To Networking" in(eventNameBefore):
             eventName = eventNameAfter
-        elif "NotWorking to Networking" in(eventNameAfter) or "NotWorking2Networking" in(eventNameAfter) or "NotWorking To Networking" in(eventNameAfter) or "N2N Montreal" in(eventNameAfter) or "N2N" in(eventNameAfter) or 'Not working to Networking Montreal' in(eventNameAfter) :
+        elif "NotWorking to Networking" in(eventNameAfter) or "NotWorking2Networking" in(eventNameAfter) or "Notworking To Networking" in(eventNameAfter) or "N2N Montreal" in(eventNameAfter) or "N2N" in(eventNameAfter) or 'Not working to Networking Montreal' in(eventNameAfter) :
             eventName = eventNameBefore
 
         if 'Latinos in ' in eventName:
