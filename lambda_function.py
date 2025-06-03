@@ -245,7 +245,7 @@ def api_data_loader():
     print('ok v5')
     return({
         'statusCode': 200,
-        'body': f"Successfully wrote weather data to notworking to networking google sheet."
+        'body': f"Successfully wrote new data to notworking to networking google sheet."
 
     })
 
