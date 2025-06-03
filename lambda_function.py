@@ -14,7 +14,7 @@ from datetime import datetime, timedelta
 import os
 
 def lambda_handler(event, context):
-    api_data_loader()
+    return(api_data_loader())
 
 def api_data_loader():
     #### Read previous data from google sheets
@@ -82,8 +82,11 @@ def api_data_loader():
     #number_events = len(response_events['events'])
     try:
         number_events = len(response_events['events'])
-    except KeyError as error:
-        raise ValueError(f'There are no new meetings from {start_date} to {end_date}') from error
+    except KeyError:
+        return {
+        'statusCode': 200,
+        'body': "The Notworking to Networking Google Sheet is already updated."
+        }
 
     all_events = response_events['events']
 
@@ -240,5 +243,10 @@ def api_data_loader():
 
     set_with_dataframe(sheet_instance, df2, row=dfToUpdate.shape[0] + 2, include_column_header=False)
     print('ok v5')
+    return({
+        'statusCode': 200,
+        'body': f"Successfully wrote weather data to notworking to networking google sheet."
 
-#lambda_handler(1,2)
+    })
+
+##lambda_handler(1,2)

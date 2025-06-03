@@ -158,7 +158,8 @@ def return_season_toronto(meeting_date: str) -> int:
     elif meeting_date <= datetime(2024,8,10): return 11
     elif meeting_date <= datetime(2024,12,6): return 12
     elif meeting_date <= datetime(2025,5,5): return 13
-    else: return 14
+    elif meeting_date <= datetime(2025,8,5): return 14
+    else: return 15
 
 def return_season_montreal(meeting_date: str) -> int:
     """
